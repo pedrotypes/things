@@ -1,7 +1,7 @@
 var itemList = {
     picker: {
         id: "picker",
-        name: "Mechanical Hand",
+        name: "Steam Powered Mechanical Arm",
         baseCost: 10,
         currentCost: 10,
         production: 1,
@@ -12,7 +12,7 @@ var itemList = {
     },
     garden: {
         id: "garden",
-        name: "Uncanny Garden",
+        name: "Little Garden of Surprises",
         baseCost: 50,
         currentCost: 50,
         production: 5,
@@ -27,7 +27,7 @@ var itemList = {
     },
     farm: {
         id: "farm",
-        name: "Weird Farm",
+        name: "Barely Functional Farm",
         baseCost: 100,
         currentCost: 100,
         production: 10,
@@ -35,14 +35,14 @@ var itemList = {
         unlocked: false,
         count: 0,
         unlock: function(state) {
-            if (state.total >= 1000 && state.score >= 1000) {
+            if (state.total >= 1000 && state.score >= 100) {
                 this.unlocked = true;
             }
         }
     },
     mine: {
         id: "mine",
-        name: "Mysterious Mine",
+        name: "Random Ore Mine",
         baseCost: 500,
         currentCost: 500,
         production: 25,
@@ -50,14 +50,14 @@ var itemList = {
         unlocked: false,
         count: 0,
         unlock: function(state) {
-            if (state.total >= 5000 && state.score >= 5000) {
+            if (state.total >= 10000 && state.score >= 500) {
                 this.unlocked = true;
             }
         }
     },
     factory: {
         id: "factory",
-        name: "Funny Factory",
+        name: "The Whimsy Factory",
         baseCost: 5000,
         currentCost: 5000,
         production: 75,
@@ -65,7 +65,37 @@ var itemList = {
         unlocked: false,
         count: 0,
         unlock: function(state) {
-            if (state.total >= 5000 && state.score >= 5000) {
+            if (state.total >= 50000 && state.score >= 5000) {
+                this.unlocked = true;
+            }
+        }
+    },
+    tower: {
+        id: "tower",
+        name: "Tower of Fancy",
+        baseCost: 50000,
+        currentCost: 50000,
+        production: 300,
+        production_action: 'capturing',
+        unlocked: false,
+        count: 0,
+        unlock: function(state) {
+            if (state.total >= 250000 && state.score >= 50000) {
+                this.unlocked = true;
+            }
+        }
+    },
+    eden: {
+        id: "eden",
+        name: "The Garden of Plenty",
+        baseCost: 500000,
+        currentCost: 500000,
+        production: 5000,
+        production_action: 'finding',
+        unlocked: false,
+        count: 0,
+        unlock: function(state) {
+            if (state.total >= 5000000 && state.score >= 500000) {
                 this.unlocked = true;
             }
         }

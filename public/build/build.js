@@ -10535,7 +10535,7 @@
 
 
 	// module
-	exports.push([module.id, "\n.panel[data-v-5dff266c] {\n    float: left;\n    display: block;\n    width:  30%;\n    margin: 0;\n    padding: 0;\n}\n.state[data-v-5dff266c] {\n}\n.items[data-v-5dff266c] {\n}\n.store[data-v-5dff266c] {\n}\n.summary[data-v-5dff266c] {\n}\n.main-action[data-v-5dff266c] {\n}\n", ""]);
+	exports.push([module.id, "\n.panel[data-v-5dff266c] {\n    float: left;\n    display: block;\n    width:  30%;\n    margin: 0;\n    padding: 0;\n}\n.state[data-v-5dff266c] {\n}\n.items[data-v-5dff266c] {\n}\n.store[data-v-5dff266c] {\n}\n.summary[data-v-5dff266c] {\n}\n.main-action[data-v-5dff266c] {\n}\n.item-id[data-v-5dff266c] {\n    display: block;\n}\n.item-production[data-v-5dff266c] {\n    display: block;\n    color: #999;\n    font-size: 0.9em;\n}\n.footer[data-v-5dff266c] {\n    position: absolute;\n    bottom: 1em;\n    right: 1em;\n    display: inline-block;\n}\n", ""]);
 
 	// exports
 
@@ -10914,11 +10914,39 @@
 	//
 	//
 	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
 
 
 	exports.default = {
 	    data: function data() {
 	        return {
+	            speed: 1,
+	            tickerInterval: null,
 	            state: {
 	                score: 0,
 	                total: 0,
@@ -10943,14 +10971,27 @@
 	            this.state.score++;
 	            this.state.total++;
 	            _Items2.default.unlock(this.state);
+	        },
+	        setSpeed: function setSpeed(speed) {
+	            this.speed = speed;
+	            this.runGame();
+	        },
+	        runGame: function runGame() {
+	            this.pauseGame(); // clears interval
+
+	            this.tickerInterval = setInterval(function () {
+	                this.tick();
+	            }.bind(this), 1000 / this.speed);
+	        },
+	        pauseGame: function pauseGame() {
+	            if (this.tickerInterval) {
+	                window.clearInterval(this.tickerInterval);
+	            };
 	        }
 	    },
 	    created: function created() {
 	        this.state.total = this.state.score;
-
-	        setInterval(function () {
-	            this.tick();
-	        }.bind(this), 1000);
+	        this.runGame();
 	    }
 	};
 
@@ -10966,7 +11007,7 @@
 	var itemList = {
 	    picker: {
 	        id: "picker",
-	        name: "Mechanical Hand",
+	        name: "Steam Powered Mechanical Arm",
 	        baseCost: 10,
 	        currentCost: 10,
 	        production: 1,
@@ -10977,7 +11018,7 @@
 	    },
 	    garden: {
 	        id: "garden",
-	        name: "Uncanny Garden",
+	        name: "Little Garden of Surprises",
 	        baseCost: 50,
 	        currentCost: 50,
 	        production: 5,
@@ -10992,7 +11033,7 @@
 	    },
 	    farm: {
 	        id: "farm",
-	        name: "Weird Farm",
+	        name: "Barely Functional Farm",
 	        baseCost: 100,
 	        currentCost: 100,
 	        production: 10,
@@ -11000,14 +11041,14 @@
 	        unlocked: false,
 	        count: 0,
 	        unlock: function unlock(state) {
-	            if (state.total >= 1000 && state.score >= 1000) {
+	            if (state.total >= 1000 && state.score >= 100) {
 	                this.unlocked = true;
 	            }
 	        }
 	    },
 	    mine: {
 	        id: "mine",
-	        name: "Mysterious Mine",
+	        name: "Random Ore Mine",
 	        baseCost: 500,
 	        currentCost: 500,
 	        production: 25,
@@ -11015,14 +11056,14 @@
 	        unlocked: false,
 	        count: 0,
 	        unlock: function unlock(state) {
-	            if (state.total >= 5000 && state.score >= 5000) {
+	            if (state.total >= 10000 && state.score >= 500) {
 	                this.unlocked = true;
 	            }
 	        }
 	    },
 	    factory: {
 	        id: "factory",
-	        name: "Funny Factory",
+	        name: "The Whimsy Factory",
 	        baseCost: 5000,
 	        currentCost: 5000,
 	        production: 75,
@@ -11030,7 +11071,37 @@
 	        unlocked: false,
 	        count: 0,
 	        unlock: function unlock(state) {
-	            if (state.total >= 5000 && state.score >= 5000) {
+	            if (state.total >= 50000 && state.score >= 5000) {
+	                this.unlocked = true;
+	            }
+	        }
+	    },
+	    tower: {
+	        id: "tower",
+	        name: "Tower of Fancy",
+	        baseCost: 50000,
+	        currentCost: 50000,
+	        production: 300,
+	        production_action: 'capturing',
+	        unlocked: false,
+	        count: 0,
+	        unlock: function unlock(state) {
+	            if (state.total >= 250000 && state.score >= 50000) {
+	                this.unlocked = true;
+	            }
+	        }
+	    },
+	    eden: {
+	        id: "eden",
+	        name: "The Garden of Plenty",
+	        baseCost: 500000,
+	        currentCost: 500000,
+	        production: 5000,
+	        production_action: 'finding',
+	        unlocked: false,
+	        count: 0,
+	        unlock: function unlock(state) {
+	            if (state.total >= 5000000 && state.score >= 500000) {
 	                this.unlocked = true;
 	            }
 	        }
@@ -11091,7 +11162,7 @@
 	    staticClass: "panel state"
 	  }, [_h('p', {
 	    staticClass: "summary"
-	  }, [(_vm.state.clicks > 0 || _vm.state.score > 0) ? _h('span', ["\n                I have\n                ", (_vm.state.score == 1) ? _h('span', ["a " + _vm._s(_vm.txt.currency) + "."]) : _h('span', [_vm._s(_vm.state.score) + " " + _vm._s(_vm.txt.currency_plural) + "."]), " "]) : _vm._e(), " ", (_vm.state.production > 0) ? _h('span', ["\n                Picking up " + _vm._s(_vm.state.production) + " " + _vm._s(_vm.txt.currency_plural) + "/s.\n            "]) : _vm._e(), "\n\n             \n        "]), " ", _h('button', {
+	  }, [(_vm.state.clicks > 0 || _vm.state.score > 0) ? _h('span', ["\n                I have\n                ", (_vm.state.score == 1) ? _h('span', ["a " + _vm._s(_vm.txt.currency) + "."]) : _h('span', [_vm._s(_vm.state.score) + " " + _vm._s(_vm.txt.currency_plural) + "."]), " "]) : _vm._e(), " ", (_vm.state.production > 0) ? _h('span', ["\n                Adding " + _vm._s(_vm.state.production) + " " + _vm._s(_vm.txt.currency_plural) + "/s.\n            "]) : _vm._e(), "\n\n             \n        "]), " ", _h('button', {
 	    staticClass: "main-action",
 	    on: {
 	      "click": function($event) {
@@ -11111,8 +11182,46 @@
 	  })])]) : _vm._e(), " ", (_vm.state.items.length > 0) ? _h('div', {
 	    staticClass: "panel items"
 	  }, [_h('p', ["\n            Stuff I made\n        "]), " ", _h('ul', [_vm._l((_vm.state.items), function(item) {
-	    return _h('li', ["\n                " + _vm._s(item.count) + "x " + _vm._s(item.name) + "\n                (" + _vm._s(item.production_action) + " " + _vm._s(item.count * item.production) + " thing/s)\n            "])
-	  })])]) : _vm._e()])
+	    return _h('li', [_h('span', {
+	      attrs: {
+	        "clas": "item-id"
+	      }
+	    }, ["\n                    " + _vm._s(item.count) + "x " + _vm._s(item.name) + "\n                "]), " ", _h('span', {
+	      staticClass: "item-production"
+	    }, ["\n                    " + _vm._s(item.production_action) + " " + _vm._s(item.count * item.production) + " thing/s\n                "])])
+	  })])]) : _vm._e(), " ", _h('div', {
+	    staticClass: "footer"
+	  }, [_h('button', {
+	    on: {
+	      "click": function($event) {
+	        _vm.pauseGame()
+	      }
+	    }
+	  }, ["pause"]), " ", _h('button', {
+	    on: {
+	      "click": function($event) {
+	        _vm.setSpeed(1)
+	      }
+	    }
+	  }, ["1x"]), " ", _h('button', {
+	    on: {
+	      "click": function($event) {
+	        _vm.setSpeed(5)
+	      }
+	    }
+	  }, ["5x"]), " ", _h('button', {
+	    on: {
+	      "click": function($event) {
+	        _vm.setSpeed(10)
+	      }
+	    }
+	  }, ["10x"]), " ", _h('button', {
+	    on: {
+	      "click": function($event) {
+	        _vm.setSpeed(100)
+	      }
+	    }
+	  }, ["100x"])])])
 	},staticRenderFns: []}
 	if (false) {
 	  module.hot.accept()
