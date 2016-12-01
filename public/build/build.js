@@ -64,8 +64,8 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var Router = new _vueRouter2.default();
-	_vue2.default.use(_vueRouter2.default);
+	// var Router = new VueRouter();
+	// Vue.use(VueRouter)
 
 	_vue2.default.component('buy-button', _BuyButton2.default);
 
@@ -74,7 +74,7 @@
 
 	var app = new _vue2.default({
 	    el: '#app',
-	    router: Router,
+	    // router: Router,
 	    components: {
 	        app: _App2.default
 	    }
