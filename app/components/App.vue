@@ -1,7 +1,5 @@
 <template>
     <div>
-        <router-view></router-view>
-
         <div class="panel state">
             <p class="summary">
                 <span v-if="state.clicks > 0 || state.score > 0">
@@ -28,7 +26,7 @@
             v-if="state.score >= cheapestItem.baseCost || state.items.length > 0"
         >
             <p>
-                I can make useful things!
+                I can make useful stuff!
             </p>
             <ul>
                 <li v-for="(item, itemId) in availableItems" v-if="item.unlocked">
@@ -43,7 +41,7 @@
 
         <div class="panel items" v-if="state.items.length > 0">
             <p>
-                Things I made
+                Stuff I made
             </p>
             <ul>
                 <li v-for="item in state.items">

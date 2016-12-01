@@ -29,6 +29,7 @@
     "bootstrap": "^3.3.5",
     "vue": "^2.0.0",
     "vue-resource": "^1.0.0",
-    "vue-router": "^2.0.0"
+    "vue-router": "^2.0.0",
+    "vuex": "^2.0.0"
   }
 }

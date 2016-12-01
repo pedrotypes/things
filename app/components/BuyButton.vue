@@ -1,6 +1,9 @@
 <template>
 
-    <button @click="buy(itemId)">
+    <button
+        @click="buy(itemId)"
+        :disabled="state.score < item.currentCost"
+    >
         {{ item.name }} ({{ item.currentCost }} {{ txt.currency_plural }})
     </button>
 

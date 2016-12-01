@@ -10914,8 +10914,6 @@
 	//
 	//
 	//
-	//
-	//
 
 
 	exports.default = {
@@ -10979,7 +10977,7 @@
 	    },
 	    garden: {
 	        id: "garden",
-	        name: "Thing Garden",
+	        name: "Uncanny Garden",
 	        baseCost: 50,
 	        currentCost: 50,
 	        production: 5,
@@ -10988,6 +10986,51 @@
 	        count: 0,
 	        unlock: function unlock(state) {
 	            if (state.total >= 50 && state.score >= 50) {
+	                this.unlocked = true;
+	            }
+	        }
+	    },
+	    farm: {
+	        id: "farm",
+	        name: "Weird Farm",
+	        baseCost: 100,
+	        currentCost: 100,
+	        production: 10,
+	        production_action: 'harvesting',
+	        unlocked: false,
+	        count: 0,
+	        unlock: function unlock(state) {
+	            if (state.total >= 1000 && state.score >= 1000) {
+	                this.unlocked = true;
+	            }
+	        }
+	    },
+	    mine: {
+	        id: "mine",
+	        name: "Mysterious Mine",
+	        baseCost: 500,
+	        currentCost: 500,
+	        production: 25,
+	        production_action: 'digging up',
+	        unlocked: false,
+	        count: 0,
+	        unlock: function unlock(state) {
+	            if (state.total >= 5000 && state.score >= 5000) {
+	                this.unlocked = true;
+	            }
+	        }
+	    },
+	    factory: {
+	        id: "factory",
+	        name: "Funny Factory",
+	        baseCost: 5000,
+	        currentCost: 5000,
+	        production: 75,
+	        production_action: 'building',
+	        unlocked: false,
+	        count: 0,
+	        unlock: function unlock(state) {
+	            if (state.total >= 5000 && state.score >= 5000) {
 	                this.unlocked = true;
 	            }
 	        }
@@ -11044,7 +11087,7 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;
-	  return _h('div', [_h('router-view'), " ", _h('div', {
+	  return _h('div', [_h('div', {
 	    staticClass: "panel state"
 	  }, [_h('p', {
 	    staticClass: "summary"
@@ -11057,7 +11100,7 @@
 	    }
 	  }, [(_vm.state.clicks == 0) ? _h('span', ["oh look, a"]) : _h('span', ["pick up another"]), " ", " " + _vm._s(_vm.txt.currency) + "!\n        "])]), " ", (_vm.state.score >= _vm.cheapestItem.baseCost || _vm.state.items.length > 0) ? _h('div', {
 	    staticClass: "panel store"
-	  }, [_h('p', ["\n            I can make useful things!\n        "]), " ", _h('ul', [_vm._l((_vm.availableItems), function(item, itemId) {
+	  }, [_h('p', ["\n            I can make useful stuff!\n        "]), " ", _h('ul', [_vm._l((_vm.availableItems), function(item, itemId) {
 	    return (item.unlocked) ? _h('li', [_h('buy-button', {
 	      attrs: {
 	        "itemId": itemId,
@@ -11067,7 +11110,7 @@
 	    })]) : _vm._e()
 	  })])]) : _vm._e(), " ", (_vm.state.items.length > 0) ? _h('div', {
 	    staticClass: "panel items"
-	  }, [_h('p', ["\n            Things I made\n        "]), " ", _h('ul', [_vm._l((_vm.state.items), function(item) {
+	  }, [_h('p', ["\n            Stuff I made\n        "]), " ", _h('ul', [_vm._l((_vm.state.items), function(item) {
 	    return _h('li', ["\n                " + _vm._s(item.count) + "x " + _vm._s(item.name) + "\n                (" + _vm._s(item.production_action) + " " + _vm._s(item.count * item.production) + " thing/s)\n            "])
 	  })])]) : _vm._e()])
 	},staticRenderFns: []}
@@ -11161,7 +11204,7 @@
 
 
 	// module
-	exports.push([module.id, "\n\n\n\n\n\n\n\n\n/**\n *\n */\n", ""]);
+	exports.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n/**\n *\n */\n", ""]);
 
 	// exports
 
@@ -11186,6 +11229,9 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+	//
+	//
+	//
 	//
 	//
 	//
@@ -11253,6 +11299,9 @@
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;
 	  return _h('button', {
+	    attrs: {
+	      "disabled": _vm.state.score < _vm.item.currentCost
+	    },
 	    on: {
 	      "click": function($event) {
 	        _vm.buy(_vm.itemId)
