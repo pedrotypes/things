@@ -10,14 +10,14 @@ var itemList = {
         count: 0,
         unlock: function(state) {}
     },
-    garden: {
-        id: "garden",
-        name: "Little Garden of Surprises",
+    shovel: {
+        id: "shovel",
+        name: "Steampunk Shovel",
         baseCost: 50,
         currentCost: 50,
         production: 5,
-        production_action: 'growing',
-        unlocked: false,
+        production_action: 'digging up',
+        unlocked: true,
         count: 0,
         unlock: function(state) {
             if (state.total >= 50 && state.score >= 50) {
@@ -25,13 +25,13 @@ var itemList = {
             }
         }
     },
-    farm: {
-        id: "farm",
-        name: "Barely Functional Farm",
+    garden: {
+        id: "garden",
+        name: "Little Garden of Surprises",
         baseCost: 100,
         currentCost: 100,
         production: 10,
-        production_action: 'harvesting',
+        production_action: 'growing',
         unlocked: false,
         count: 0,
         unlock: function(state) {
@@ -42,11 +42,11 @@ var itemList = {
     },
     mine: {
         id: "mine",
-        name: "Random Ore Mine",
+        name: "Mines of Mystery",
         baseCost: 500,
         currentCost: 500,
         production: 25,
-        production_action: 'digging up',
+        production_action: 'mining',
         unlocked: false,
         count: 0,
         unlock: function(state) {
@@ -55,13 +55,13 @@ var itemList = {
             }
         }
     },
-    factory: {
-        id: "factory",
-        name: "The Whimsy Factory",
+    market: {
+        id: "market",
+        name: "Fleamarket of Fancy Findings",
         baseCost: 5000,
         currentCost: 5000,
         production: 75,
-        production_action: 'building',
+        production_action: 'finding',
         unlocked: false,
         count: 0,
         unlock: function(state) {
@@ -72,11 +72,11 @@ var itemList = {
     },
     tower: {
         id: "tower",
-        name: "Tower of Fancy",
+        name: "Tower of Inspiration",
         baseCost: 50000,
         currentCost: 50000,
         production: 300,
-        production_action: 'capturing',
+        production_action: 'inventing',
         unlocked: false,
         count: 0,
         unlock: function(state) {
@@ -85,13 +85,13 @@ var itemList = {
             }
         }
     },
-    eden: {
-        id: "eden",
-        name: "The Garden of Plenty",
+    pillar: {
+        id: "pillar",
+        name: "The Pillar of Creation",
         baseCost: 500000,
         currentCost: 500000,
         production: 5000,
-        production_action: 'finding',
+        production_action: 'creating',
         unlocked: false,
         count: 0,
         unlock: function(state) {
