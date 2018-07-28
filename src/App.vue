@@ -1,16 +1,6 @@
 <template>
   <div>
     <div class="panel state">
-      <fieldset>
-        <label>State</label>
-        <ul>
-          <li>score: {{ score }}</li>
-          <li>clicks: {{ clicks }}</li>
-          <li>total: {{ total }}</li>
-          <li>production: {{ production }}</li>
-        </ul>
-      </fieldset>
-
       <p class="summary">
         <span v-if="score > 0">
           I have
@@ -29,6 +19,16 @@
         <span v-if="clicks == 0">oh look, a</span>
         <span v-else>pick up another</span> {{ txt.currency }}!
       </button>
+
+      <fieldset class="debug" v-if="debug">
+        <label>State</label>
+        <ul>
+          <li>score: {{ score }}</li>
+          <li>clicks: {{ clicks }}</li>
+          <li>total: {{ total }}</li>
+          <li>production: {{ production }}</li>
+        </ul>
+      </fieldset>
     </div>
 
     <div
@@ -64,6 +64,8 @@
         </li>
       </ul>
     </div>
+
+    <div class="debug-help">Press 'd' to debug</div>
 
     <div class="footer">
       <button @click="pauseGame()">pause</button>
@@ -108,6 +110,15 @@
     right: 1em;
     display: inline-block;
   }
+  .debug {
+    margin-top: 1em;
+  }
+  .debug-help {
+    position: absolute;
+    bottom: 1em;
+    left: 1em;
+    display: inline-block;
+  }
 </style>
 
 <script>
@@ -127,7 +138,8 @@ export default {
       },
       txt: Txt,
       availableItems: Items.list(),
-      cheapestItem: Items.cheapest()
+      cheapestItem: Items.cheapest(),
+      debug: false
     }
   },
   computed: {
@@ -173,11 +185,21 @@ export default {
       if (this.tickerInterval) {
         window.clearInterval(this.tickerInterval)
       };
+    },
+    keyUp (e) {
+      console.log(e)
     }
   },
   created () {
     this.state.total = this.state.score
     this.runGame()
+  },
+  mounted () {
+    window.addEventListener('keypress', function (e) {
+      if (e.keyCode === 100) { // d key
+        this.debug = !this.debug
+      }
+    }.bind(this))
   }
 }
 </script>
