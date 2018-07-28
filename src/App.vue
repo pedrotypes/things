@@ -118,6 +118,7 @@ import Items from './services/Items.js'
 import Txt from './services/Txt.js'
 import BuyButton from './components/BuyButton'
 import Debug from './components/Debug'
+import { mapState } from 'vuex'
 
 export default {
   components: { BuyButton, Debug },
@@ -135,18 +136,7 @@ export default {
     }
   },
   computed: {
-    score () {
-      return this.$store.state.score
-    },
-    total () {
-      return this.$store.state.total
-    },
-    clicks () {
-      return this.$store.state.clicks
-    },
-    production () {
-      return this.$store.state.production
-    },
+    ...mapState(['score', 'total', 'clicks', 'production']),
     isDevelopment () {
       return process.env.NODE_ENV === 'development'
     }
