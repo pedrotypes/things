@@ -4,8 +4,8 @@
       <fieldset>
         <label>State</label>
         <ul>
-          <li>clicks: {{ clicks }}</li>
           <li>score: {{ score }}</li>
+          <li>clicks: {{ clicks }}</li>
           <li>total: {{ total }}</li>
           <li>production: {{ production }}</li>
         </ul>
@@ -123,11 +123,7 @@ export default {
       speed: 1,
       tickerInterval: null,
       state: {
-        score: 0,
-        total: 0,
-        production: 0,
-        items: [],
-        clicks: 0
+        items: []
       },
       txt: Txt,
       availableItems: Items.list(),
