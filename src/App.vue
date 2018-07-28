@@ -20,15 +20,7 @@
         <span v-else>pick up another</span> {{ txt.currency }}!
       </button>
 
-      <fieldset class="debug" v-if="debug">
-        <label>State</label>
-        <ul>
-          <li>score: {{ score }}</li>
-          <li>clicks: {{ clicks }}</li>
-          <li>total: {{ total }}</li>
-          <li>production: {{ production }}</li>
-        </ul>
-      </fieldset>
+      <debug v-if="debug" />
     </div>
 
     <div
@@ -112,9 +104,6 @@
     right: 1em;
     display: inline-block;
   }
-  .debug {
-    margin-top: 1em;
-  }
   .debug-help {
     position: absolute;
     bottom: 1em;
@@ -128,9 +117,10 @@
 import Items from './services/Items.js'
 import Txt from './services/Txt.js'
 import BuyButton from './components/BuyButton'
+import Debug from './components/Debug'
 
 export default {
-  components: { BuyButton },
+  components: { BuyButton, Debug },
   data () {
     return {
       speed: 1,
