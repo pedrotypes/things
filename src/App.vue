@@ -182,9 +182,21 @@ export default {
   mounted () {
     // capture keypresses
     window.addEventListener('keypress', function (e) {
+      console.log(e.keyCode)
+
+      // toggle debug mode
       if (e.keyCode === 100) { // d key
         this.debug = !this.debug
       }
+
+      // speed control
+      if (e.keyCode === 49) { this.setSpeed(1) }
+      if (e.keyCode === 50) { this.setSpeed(5) }
+      if (e.keyCode === 51) { this.setSpeed(10) }
+      if (e.keyCode === 52) { this.setSpeed(100) }
+
+      // pause game
+      if (e.keyCode === 112) { this.pauseGame() }
     }.bind(this))
   }
 }
