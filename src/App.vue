@@ -4,6 +4,7 @@
       <fieldset>
         <label>State</label>
         <ul>
+          <li>clicks: {{ clicks }}</li>
           <li>score: {{ score }}</li>
           <li>total: {{ total }}</li>
           <li>production: {{ production }}</li>
@@ -11,21 +12,21 @@
       </fieldset>
 
       <p class="summary">
-        <span v-if="state.clicks > 0 || state.score > 0">
+        <span v-if="score > 0">
           I have
-          <span v-if="state.score == 1">a {{ txt.currency }}.</span>
-          <span v-else>{{ state.score }} {{ txt.currency_plural }}.</span>
+          <span v-if="score == 1">a {{ txt.currency }}.</span>
+          <span v-else>{{ score }} {{ txt.currency_plural }}.</span>
         </span>
 
-        <span v-if="state.production > 0">
-          Adding {{ state.production }} {{ txt.currency_plural }}/s.
+        <span v-if="production > 0">
+          Adding {{ production }} {{ txt.currency_plural }}/s.
         </span>
 
         &nbsp;
       </p>
 
       <button class="main-action" @click="pick()">
-        <span v-if="state.clicks == 0">oh look, a</span>
+        <span v-if="clicks == 0">oh look, a</span>
         <span v-else>pick up another</span> {{ txt.currency }}!
       </button>
     </div>
@@ -140,6 +141,9 @@ export default {
     total () {
       return this.$store.state.total
     },
+    clicks () {
+      return this.$store.state.clicks
+    },
     production () {
       return this.$store.state.production
     }
@@ -151,6 +155,7 @@ export default {
     },
 
     pick () {
+      this.$store.commit('click')
       this.$store.commit('incrementScore')
       Items.unlock(this.score, this.total)
     },

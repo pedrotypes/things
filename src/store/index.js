@@ -5,11 +5,15 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store({
   state: {
+    clicks: 0,
     score: 0,
     total: 0,
     production: 0
   },
   mutations: {
+    click (state) {
+      state.clicks++
+    },
     incrementScore (state, points = 1) {
       state.score += points
       state.total += points
