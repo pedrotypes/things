@@ -8,7 +8,8 @@ const store = new Vuex.Store({
     clicks: 0,
     score: 0,
     total: 0,
-    production: 0
+    production: 0,
+    speed: 1
   },
   mutations: {
     click (state) {
@@ -23,6 +24,9 @@ const store = new Vuex.Store({
     },
     addProduction (state, amount) {
       state.production += amount
+    },
+    setSpeed (state, speed) {
+      state.speed = speed
     }
   }
 })

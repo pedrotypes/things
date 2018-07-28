@@ -124,7 +124,6 @@ export default {
   components: { BuyButton, Debug },
   data () {
     return {
-      speed: 1,
       tickerInterval: null,
       state: {
         items: []
@@ -136,7 +135,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(['score', 'total', 'clicks', 'production']),
+    ...mapState(['score', 'total', 'clicks', 'production', 'speed']),
     isDevelopment () {
       return process.env.NODE_ENV === 'development'
     }
@@ -154,6 +153,7 @@ export default {
     },
 
     setSpeed (speed) {
+      this.$store.commit('setSpeed', speed)
       this.speed = speed
       this.runGame()
     },
@@ -182,7 +182,7 @@ export default {
   mounted () {
     // capture keypresses
     window.addEventListener('keypress', function (e) {
-      console.log(e.keyCode)
+      // console.log(e.keyCode)
 
       // toggle debug mode
       if (e.keyCode === 100) { // d key

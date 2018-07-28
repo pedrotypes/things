@@ -7,6 +7,7 @@
       <li>clicks: {{clicks}}</li>
       <li>total: {{total}}</li>
       <li>production: {{production}}</li>
+      <li>game speed: {{speed}}x</li>
     </ul>
   </fieldset>
 
@@ -23,7 +24,7 @@ import { mapState } from 'vuex'
 
 export default {
   computed: {
-    ...mapState(['score', 'total', 'clicks', 'production'])
+    ...mapState(['score', 'total', 'clicks', 'production', 'speed'])
   }
 }
 </script>
