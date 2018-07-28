@@ -1,6 +1,14 @@
 <template>
   <div>
     <div class="panel state">
+      <fieldset>
+        <label>State</label>
+        <ul>
+          <li>score: {{ score }}</li>
+          <li>total: {{ total }}</li>
+        </ul>
+      </fieldset>
+
       <p class="summary">
         <span v-if="state.clicks > 0 || state.score > 0">
           I have
@@ -124,14 +132,26 @@ export default {
       cheapestItem: Items.cheapest()
     }
   },
+  computed: {
+    score () {
+      return this.$store.state.score
+    },
+    total () {
+      return this.$store.state.total
+    }
+  },
   methods: {
     tick () {
+      this.$store.commit('incrementScore', this.state.production)
+
       this.state.score += this.state.production
       this.state.total += this.state.production
       Items.unlock(this.state)
     },
 
     pick () {
+      this.$store.commit('incrementScore')
+
       this.state.clicks++
       this.state.score++
       this.state.total++
