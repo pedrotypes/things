@@ -65,7 +65,9 @@
       </ul>
     </div>
 
-    <div class="debug-help">Press 'd' to debug</div>
+    <div class="debug-help" v-if="isDevelopment">
+      Press 'd' to debug
+    </div>
 
     <div class="footer">
       <button @click="pauseGame()">pause</button>
@@ -154,6 +156,9 @@ export default {
     },
     production () {
       return this.$store.state.production
+    },
+    isDevelopment () {
+      return process.env.NODE_ENV === 'development'
     }
   },
   methods: {
@@ -195,6 +200,7 @@ export default {
     this.runGame()
   },
   mounted () {
+    // capture keypresses
     window.addEventListener('keypress', function (e) {
       if (e.keyCode === 100) { // d key
         this.debug = !this.debug
