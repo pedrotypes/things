@@ -106,8 +106,10 @@
 
 import Items from './services/Items.js'
 import Txt from './services/Txt.js'
+import BuyButton from './components/BuyButton'
 
 export default {
+  components: { BuyButton },
   data () {
     return {
       speed: 1,
