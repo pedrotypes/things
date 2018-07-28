@@ -8,7 +8,7 @@ var itemList = {
     production_action: 'picking up',
     unlocked: true,
     count: 0,
-    unlock: function (state) {}
+    unlock: function (score, total) {}
   },
   shovel: {
     id: 'shovel',
@@ -19,8 +19,8 @@ var itemList = {
     production_action: 'digging up',
     unlocked: false,
     count: 0,
-    unlock: function (state) {
-      if (state.total >= 50 && state.score >= 50) {
+    unlock: function (score, total) {
+      if (total >= 50 && score >= 50) {
         this.unlocked = true
       }
     }
@@ -34,8 +34,8 @@ var itemList = {
     production_action: 'growing',
     unlocked: false,
     count: 0,
-    unlock: function (state) {
-      if (state.total >= 1000 && state.score >= 100) {
+    unlock: function (score, total) {
+      if (total >= 1000 && score >= 100) {
         this.unlocked = true
       }
     }
@@ -49,8 +49,8 @@ var itemList = {
     production_action: 'mining',
     unlocked: false,
     count: 0,
-    unlock: function (state) {
-      if (state.total >= 10000 && state.score >= 500) {
+    unlock: function (score, total) {
+      if (total >= 10000 && score >= 500) {
         this.unlocked = true
       }
     }
@@ -64,8 +64,8 @@ var itemList = {
     production_action: 'finding',
     unlocked: false,
     count: 0,
-    unlock: function (state) {
-      if (state.total >= 50000 && state.score >= 5000) {
+    unlock: function (score, total) {
+      if (total >= 50000 && score >= 5000) {
         this.unlocked = true
       }
     }
@@ -79,8 +79,8 @@ var itemList = {
     production_action: 'inventing',
     unlocked: false,
     count: 0,
-    unlock: function (state) {
-      if (state.total >= 250000 && state.score >= 50000) {
+    unlock: function (score, total) {
+      if (total >= 250000 && score >= 50000) {
         this.unlocked = true
       }
     }
@@ -94,8 +94,8 @@ var itemList = {
     production_action: 'creating',
     unlocked: false,
     count: 0,
-    unlock: function (state) {
-      if (state.total >= 5000000 && state.score >= 500000) {
+    unlock: function (score, total) {
+      if (total >= 5000000 && score >= 500000) {
         this.unlocked = true
       }
     }
@@ -126,9 +126,9 @@ const Items = {
     }
   },
 
-  unlock (state) {
+  unlock (score, total) {
     for (let id in this.list()) {
-      this.list()[id].unlock(state)
+      this.list()[id].unlock(score, total)
     }
   }
 }

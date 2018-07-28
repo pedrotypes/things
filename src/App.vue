@@ -6,6 +6,7 @@
         <ul>
           <li>score: {{ score }}</li>
           <li>total: {{ total }}</li>
+          <li>production: {{ production }}</li>
         </ul>
       </fieldset>
 
@@ -31,7 +32,7 @@
 
     <div
       class="panel store"
-      v-if="state.score >= cheapestItem.baseCost || state.items.length > 0"
+      v-if="score >= cheapestItem.baseCost || state.items.length > 0"
     >
       <p>
         I can make useful stuff!
@@ -138,24 +139,20 @@ export default {
     },
     total () {
       return this.$store.state.total
+    },
+    production () {
+      return this.$store.state.production
     }
   },
   methods: {
     tick () {
-      this.$store.commit('incrementScore', this.state.production)
-
-      this.state.score += this.state.production
-      this.state.total += this.state.production
-      Items.unlock(this.state)
+      this.$store.commit('incrementScore', this.production)
+      Items.unlock(this.score, this.total)
     },
 
     pick () {
       this.$store.commit('incrementScore')
-
-      this.state.clicks++
-      this.state.score++
-      this.state.total++
-      Items.unlock(this.state)
+      Items.unlock(this.score, this.total)
     },
 
     setSpeed (speed) {

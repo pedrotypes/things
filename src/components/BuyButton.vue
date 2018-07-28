@@ -2,7 +2,7 @@
 
   <button
     @click="buy(itemId)"
-    :disabled="state.score < item.currentCost"
+    :disabled="score < item.currentCost"
   >
     {{ item.name }} ({{ item.currentCost }} {{ txt.currency_plural }})
   </button>
@@ -27,12 +27,23 @@ export default {
       txt: Txt
     }
   },
+  computed: {
+    score () {
+      return this.$store.state.score
+    },
+    total () {
+      return this.$store.state.total
+    },
+    production () {
+      return this.$store.state.production
+    }
+  },
   methods: {
     buy (itemId) {
       // Get item info and determine whether we can buy it
       var info = Items.info(itemId)
       var cost = info.currentCost
-      if (this.state.score < cost) return
+      if (this.score < cost) return
 
       // Create the item
       var item = Items.make(itemId)
@@ -40,8 +51,8 @@ export default {
       item.built++
 
       // Pay the price
-      this.state.score -= cost
-      this.state.production += item.production
+      this.$store.commit('pay', cost)
+      this.$store.commit('addProduction', item.production)
 
       // Update the item list
       var found = false
@@ -55,7 +66,7 @@ export default {
       }
 
       // Unlock other items?
-      Items.unlock(this.state)
+      Items.unlock(this.score, this.total)
     }
   },
   created: function () {
