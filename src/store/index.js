@@ -10,8 +10,8 @@ const store = new Vuex.Store({
   },
   mutations: {
     incrementScore (state, points = 1) {
-      state.score++
-      state.total++
+      state.score += points
+      state.total += points
     }
   }
 })
