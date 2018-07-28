@@ -1,5 +1,3 @@
-/* eslint-disable */
-
 <template>
   <div>
     <div class="panel state">
