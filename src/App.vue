@@ -188,20 +188,30 @@ export default {
   mounted () {
     // capture keypresses
     window.addEventListener('keypress', function (e) {
-      // toggle debug mode
-      if (e.keyCode === 100) { // d key
-        this.debug = !this.debug
-      }
+      switch (e.keyCode) {
+        // d key for debug
+        case 100:
+          this.debug = !this.debug
+          break
 
-      // speed control
-      if (e.keyCode === 49) { this.setSpeed(1) }
-      if (e.keyCode === 50) { this.setSpeed(5) }
-      if (e.keyCode === 51) { this.setSpeed(10) }
-      if (e.keyCode === 52) { this.setSpeed(100) }
+        // speed control, keys 1-4
+        case 49:
+          this.setSpeed(1)
+          break
+        case 50:
+          this.setSpeed(5)
+          break
+        case 51:
+          this.setSpeed(10)
+          break
+        case 52:
+          this.setSpeed(100)
+          break
 
-      // pause game
-      if (e.keyCode === 112) {
-        this.togglePause()
+        // pause game on p key
+        case 112:
+          this.togglePause()
+          break
       }
     }.bind(this))
   }
