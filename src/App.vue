@@ -20,7 +20,7 @@
         <span v-else>pick up another</span> {{ txt.currency }}!
       </button>
 
-      <debug v-if="debug" />
+      <debug />
     </div>
 
     <div
@@ -130,8 +130,7 @@ export default {
       },
       txt: Txt,
       availableItems: Items.list(),
-      cheapestItem: Items.cheapest(),
-      debug: false
+      cheapestItem: Items.cheapest()
     }
   },
   computed: {
@@ -187,11 +186,6 @@ export default {
     // capture keypresses
     window.addEventListener('keypress', function (e) {
       switch (e.keyCode) {
-        // d key for debug
-        case 100:
-          this.debug = !this.debug
-          break
-
         // speed control, keys 1-4
         case 49:
           this.setSpeed(1)

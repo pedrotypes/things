@@ -1,6 +1,6 @@
 <template>
 
-  <fieldset class="debug">
+  <fieldset class="debug" v-if="debugging">
     <label>State</label>
     <ul>
       <li>score: {{score}}</li>
@@ -24,8 +24,21 @@
 import { mapState } from 'vuex'
 
 export default {
+  data () {
+    return {
+      debugging: process.env.NODE_ENV === 'development'
+    }
+  },
   computed: {
     ...mapState(['score', 'total', 'clicks', 'production', 'speed', 'isPaused'])
+  },
+  created () {
+    // listen to d key for debug
+    window.addEventListener('keypress', function (e) {
+      if (e.keyCode === 100) {
+        this.debugging = !this.debugging
+      }
+    }.bind(this))
   }
 }
 </script>
