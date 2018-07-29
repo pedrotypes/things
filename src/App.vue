@@ -182,10 +182,8 @@ export default {
     }
   },
   created () {
-    this.state.total = this.state.score
     this.runGame()
-  },
-  mounted () {
+
     // capture keypresses
     window.addEventListener('keypress', function (e) {
       switch (e.keyCode) {
