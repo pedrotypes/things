@@ -31,7 +31,7 @@
         I can make useful stuff!
       </p>
       <ul>
-        <li v-for="(item, key) in availableItems" v-if="item.unlocked">
+        <li v-for="(item, key) in availableItems" v-if="item.unlocked" :key="key">
           <buy-button
             v-bind:itemId="key"
             v-bind:item="item"
@@ -46,7 +46,7 @@
         Stuff I made
       </p>
       <ul>
-        <li v-for="item in state.items">
+        <li v-for="(item, key) in state.items" :key="key">
           <span clas="item-id">
             {{ item.count }}x {{ item.name }}
           </span>
