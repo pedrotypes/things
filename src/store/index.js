@@ -9,7 +9,8 @@ const store = new Vuex.Store({
     score: 0,
     total: 0,
     production: 0,
-    speed: 1
+    speed: 1,
+    isPaused: false
   },
   mutations: {
     click (state) {
@@ -27,6 +28,12 @@ const store = new Vuex.Store({
     },
     setSpeed (state, speed) {
       state.speed = speed
+    },
+    pause (state) {
+      state.isPaused = true
+    },
+    unpause (state) {
+      state.isPaused = false
     }
   }
 })

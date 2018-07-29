@@ -135,7 +135,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(['score', 'total', 'clicks', 'production', 'speed']),
+    ...mapState(['score', 'total', 'clicks', 'production', 'speed', 'isPaused']),
     isDevelopment () {
       return process.env.NODE_ENV === 'development'
     }
@@ -154,7 +154,6 @@ export default {
 
     setSpeed (speed) {
       this.$store.commit('setSpeed', speed)
-      this.speed = speed
       this.runGame()
     },
 
@@ -171,8 +170,15 @@ export default {
         window.clearInterval(this.tickerInterval)
       };
     },
-    keyUp (e) {
-      console.log(e)
+
+    togglePause () {
+      if (this.isPaused) {
+        this.$store.commit('unpause')
+        this.runGame()
+      } else {
+        this.$store.commit('pause')
+        this.pauseGame()
+      }
     }
   },
   created () {
@@ -182,8 +188,6 @@ export default {
   mounted () {
     // capture keypresses
     window.addEventListener('keypress', function (e) {
-      // console.log(e.keyCode)
-
       // toggle debug mode
       if (e.keyCode === 100) { // d key
         this.debug = !this.debug
@@ -196,7 +200,9 @@ export default {
       if (e.keyCode === 52) { this.setSpeed(100) }
 
       // pause game
-      if (e.keyCode === 112) { this.pauseGame() }
+      if (e.keyCode === 112) {
+        this.togglePause()
+      }
     }.bind(this))
   }
 }
