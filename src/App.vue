@@ -64,9 +64,16 @@
     <div class="footer">
       <button @click="pauseGame()">pause</button>
       <button @click="setSpeed(1)">1x</button>
-      <button @click="setSpeed(5)">5x</button>
-      <button @click="setSpeed(10)">10x</button>
-      <button @click="setSpeed(100)">100x</button>
+
+      <template v-if="isDevelopment">
+        <button @click="setSpeed(5)">5x</button>
+        <button @click="setSpeed(10)">10x</button>
+        <button @click="setSpeed(100)">100x</button>
+      </template>
+
+      <template v-else>
+        <button @click="setSpeed(2)">2x</button>
+      </template>
     </div>
 
   </div>
@@ -186,26 +193,46 @@ export default {
     // capture keypresses
     window.addEventListener('keypress', function (e) {
       switch (e.keyCode) {
-        // speed control, keys 1-4
-        case 49:
-          this.setSpeed(1)
-          break
-        case 50:
-          this.setSpeed(5)
-          break
-        case 51:
-          this.setSpeed(10)
-          break
-        case 52:
-          this.setSpeed(100)
-          break
-
         // pause game on p key
         case 112:
           this.togglePause()
           break
       }
     }.bind(this))
+
+    if (this.isDevelopment) {
+      // development-only keypresses
+      window.addEventListener('keypress', function (e) {
+        switch (e.keyCode) {
+          // speed control, keys 1-4
+          case 49:
+            this.setSpeed(1)
+            break
+          case 50:
+            this.setSpeed(5)
+            break
+          case 51:
+            this.setSpeed(10)
+            break
+          case 52:
+            this.setSpeed(100)
+            break
+        }
+      }.bind(this))
+    } else {
+      // production-only keypresses
+      window.addEventListener('keypress', function (e) {
+        switch (e.keyCode) {
+          // speed control, keys 1-2
+          case 49:
+            this.setSpeed(1)
+            break
+          case 50:
+            this.setSpeed(2)
+            break
+        }
+      }.bind(this))
+    }
   }
 }
 </script>
